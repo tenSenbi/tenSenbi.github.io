@@ -1,0 +1,228 @@
+
+/*기본*/
+body {margin:0; padding:0; font-family:"Apple SD Gothic Neo","맑은고딕","Malgun Gothic",sans-serif; color:#ffffff;}
+h1 {color:#000; font-size: 1em;}
+h3 {padding:0;}
+h5 {padding:0; margin:3px; font-size:12px;}
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:#ffffff;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px; overflow:hidden;padding:10px 5px;word-break:normal;}
+img{float:left;}
+ul {list-style:none; margin:0; padding:0;}
+input:focus { outline: none; }
+textarea {font-size:16px;}
+.spinner {width:50px; height:20px; }
+#rap {margin: 0px auto; overflow: hidden; overflow-x: hidden;overflow-y: hidden; min-width:910px; width: 910px;}
+/*
+.ui-spinner-up{width:15px; height:15px; display:block;}
+.ui-button .ui-icon: {url(imgs/plus.png)}
+*/
+
+
+/*스텟*/
+#container_stat {float:left; width:300px; height:450px; border:1px solid #996633; margin-bottom:10px; background-color:#191919; color:#ffffff;}
+.charname {margin:10px;  height:23px; border:1px solid #996633;  border-radius:20px;  text-align:center; background-image:url("../imgs/bg.png"); color:#ffff33;}
+.stlist {width:278px; margin:5px; padding:5px; border:1px solid #996633;  border-radius:3px;}
+.st_point {width:100%; padding:5px; display:inline-block; text-align:left;}
+.stname {width:130px; display:inline-block;}
+.stpoint {width:60px; text-align:left;}
+.mt_point {width:60px; text-align:center; color:#3399ff;}
+.stmenu {margin:2px; background-color:#303030; ;font-size:13px;}
+.stmenu_list {margin-left:4px; ;font-size:12px;}
+.stleft {width:130px; display:inline-block;}
+.stri {width:130px; display:inline-block; color:#ffff33;}
+.tmag {width:130px; display:inline-block; color:#cc33cc;}
+.wsp {margin-left:15px;}
+.yellow {color:#ffff33;}
+.red {color:red;}
+
+/*데이터*/
+.data_pint {float:left; /*width:580px;*/ height:450px; margin-left:10px; padding-left:10px; padding-right:10px; background-color:#191919; display:block; }
+
+.tg1  {float:left;  border-collapse:collapse;border-spacing:0;}
+.tg1 td{border-color:#ffffff;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;overflow:hidden;padding:3px;word-break:normal;}
+.tg1 th{border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;font-weight:normal;overflow:hidden;padding:3px;word-break:normal;}
+.tg1 .tg-cly1{text-align:left;vertical-align:middle;}
+.tg1 .tg-0lax{text-align:left;vertical-align:top;}
+
+.tg2  {float:left; margin-left:10px; border-collapse:collapse;border-spacing:0;}
+.tg2 td{border-color:#ffffff;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;overflow:hidden;padding:3px;word-break:normal;}
+.tg2 th{border-color:#ffffff;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;font-weight:normal;overflow:hidden;padding:3px;word-break:normal;}
+.tg2 .tg-0pky{border-color:inherit;text-align:left;vertical-align:top;}
+.tg2 .tg-0lax{text-align:left;vertical-align:top;}
+
+.tg3  {clear:both;}
+.HSAM {float:left; width:25%;}
+.hp_pint {color:red;}
+.sd_pint {color:#cc9900;}
+.ag_pint {color:#ff0099;}
+.mp_pint {color:#0066ff;}
+
+/*스킬트리 */
+
+.head_title{border-width: 1px 0; width:100%; border-style: solid; text-align:center;background-color: #e9e9e9;border-color: #ddd;color: #333;text-shadow: 0 1px 0 #eee;font-weight:70;}
+#container_masterskill {float:left; width:900px; height:555px; display:inline-block; background-color:#191919; margin:0px;}  
+.container_MS ul li img{border:1px solid #ffcc33; padding:1px; border-radius:1px;}
+.boxs {float:left; width:65px; height:35px; margin-top:2px; padding-top:15px; padding-left:8px; font-size:11px;}  
+.charname2 {margin:10px; height:23px; border:1px solid #996633;  border-radius:20px; background-image:url("../imgs/bg.png");}
+.tit1 {float:left; width:60%; text-align:center; height: 20px; text-align:center;  color:#ffff33;}
+.tit2 {float:left; width:250px; margin-top:1px; text-align:center; font-size:12px; background-color:#191919; border:1px solid #ffffff; border-radius:20px; color:#ffffff;}
+.char_lv {float:left; width:125px; border-right:1px solid #ffffff;}
+#mlv {width:50px; line-height:20px; color:red; font-size:12px; font-weight:bold;}
+#mpo {width:50px; line-height:20px; color:red; font-size:12px; font-weight:bold;}
+.reset {margin-left:20px; background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%); background-color:#eae0c2; border-radius:2px; border:1px solid #333029; display:inline-block; cursor:pointer; color:#505739; font-family:Arial; font-size:11px; padding:0px 5px; text-decoration:none; text-shadow:1px 1px 1px #ffffff;}
+.reset:hover { background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%); background-color:#ccc2a6;}
+.reset:active { position:relative; top:1px;}
+
+.container_MS {margin:3px; display:inline-block;}
+.content_box {border:1px solid #ccc; border-radius:5px; height:475px;}
+
+/*룬마*/
+.LUN_MS1 {float:left; margin-left:2px; width:295px; height:500px; background-image:url("../imgs/1.png"); /*background-color:#191919;*/}
+.LUN_MS2 {float:left; margin-left:2px; width:295px; height:500px; background-image:url("../imgs/2.png"); /*background-color:#191919;*/}
+.LUN_MS3 {float:left; margin-left:2px; width:295px; height:500px; background-image:url("../imgs/3.png"); /*background-color:#191919;*/}
+
+/*슬래*/
+.SL_MS1 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg1.jpg"); background-color:#191919;*/}
+.SL_MS2 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg2.jpg"); background-color:#191919;*/}
+.SL_MS3 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg3.jpg"); background-color:#191919;*/}
+
+/*레파*/
+.RF_MS1 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg1.jpg"); background-color:#191919;*/}
+.RF_MS2 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg2.jpg"); background-color:#191919;*/}
+.RF_MS3 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg3.jpg"); background-color:#191919;*/}
+
+/*렌서*/
+.LAN_MS1 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg1.jpg"); background-color:#191919;*/}
+.LAN_MS2 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg2.jpg"); background-color:#191919;*/}
+.LAN_MS3 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg3.jpg"); background-color:#191919;*/}
+
+/*다크*/
+.DARK_MS1 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg1.jpg"); background-color:#191919;*/}
+.DARK_MS2 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg2.jpg"); background-color:#191919;*/}
+.DARK_MS3 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg3.jpg"); background-color:#191919;*/}
+/*마검*/
+.MG_MS1 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg1.jpg"); background-color:#191919;*/}
+.MG_MS2 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg2.jpg"); background-color:#191919;*/}
+.MG_MS3 {float:left; margin-left:2px; width:295px; height:500px; /*background-image:url("../masterST/SL/bg3.jpg"); background-color:#191919;*/}
+
+.MS_name1{width:100%; height:23px; text-align:center; background-color:#009933; border-radius:20px; font-size: 13px; font-weight:bold; color:#ffff33;}
+.MS_name2{width:100%; height:23px; text-align:center; background-color:#3399cc; border-radius:20px; font-size: 13px; font-weight:bold; color:#ffff33;}
+.MS_name3{width:100%; height:23px; text-align:center; background-color:#cc0066; border-radius:20px; font-size: 13px; font-weight:bold; color:#ffff33;}
+
+.masterpoint {text-align:left;}
+.master_skill_data{float:left;  width:30px; height:13px; margin-left:3px; margin-bottom:3px; padding-top:0; font-size:9pt; color:#ffffff;}
+.mtout{float:left;  width:30px; height:13px; margin-left:3px; margin-bottom:3px; padding-top:0; font-size:9pt; color:#ffffff;}
+.skill_icon {float:left; width:65px; height:35px; display:block;} 
+
+
+/* 미리 보기 */
+.ul_list div{margin-right:10px; float:left; }
+.line1 {border-left:1px solid #6633ff; padding-left:10px;}
+.ul_list li{display:block; padding:0; margin:0; }
+#preview {border:1px; z-index:1; left:78px; display:block; visibility: hidden; position: absolute; top:15px;}
+#ta_list{padding:5px; width:190px;; height:auto; display:block; background-color:#ffffff; font-size:9pt; color:#ff3366; filter:alpha(opacity=90);  /* For IE 5-7 */; border-width:1; border-color:#6633ff; border-style:solid;}
+
+
+/* 스킬 트리 보기 */
+.list_output {width:300px; float:left;}
+.print {width:30px;border:none; color:red;}
+#hid {display: none;}
+.list_img{width: 12px; float:left; height: auto;border:1px solid #cc3366; padding:1px; margin:0px;}
+
+
+
+
+
+/*스킬 강화*/
+#container_skillup {float:left; width:900px; height:600px; margin-top:10px; display:inline-block; margin-bottom:5px; background-color:#191919;}
+/*name*/
+.charname3 {margin:10px;  height:23px; border:1px solid #996633;  border-radius:20px;  text-align:center; background-image:url("../imgs/bg.png"); color:#ffff33;}
+.skillup_tit1 {float:left; width:60%; text-align:center; height: 20px; text-align:center;  color:#ffff33;}
+.skillup_tit2 {float:left; width:250px; margin-top:1px; text-align:center; font-size:12px; background-color:#191919; border:1px solid #ffffff; border-radius:20px; color:#ffffff;}
+.skillup_char_lv {float:left; width:125px; border-right:1px solid #ffffff;}
+.skillup_point {}
+#skillup_lv {width:50px; line-height:20px; color:red; font-size:12px; font-weight:bold;}
+#skillup_sp {width:50px; line-height:20px; color:red; font-size:12px; font-weight:bold;}
+
+/*com*/
+.s_up_data {float:left;  width:30px; height:13px; margin-left:3px; margin-bottom:3px; padding-top:0; font-size:9pt; color:#ffffff;}
+.s_up_point {float:left;display:inline-block; text-align:left;}
+.4th_skill_icon {float:left; width:70px; height:35px; display:block;} 
+
+/* tabs head */
+.skillup_tabs_container {float:left; width:880px; padding-left:10px; }
+ul.tabs {margin:0; padding:0; list-style: none; height:32px; border-bottom:1px solid #ccc; font-family:"dotum";font-size:12px;}
+ul.tabs li {float:left; margin-left:15px; text-align:center; cursor:pointer; width:90px; height:31px; line-height:31px; border:1px solid #ccc;   border-radius:5px 5px 1px 1px; font-weight:bold; background-color:#191919; overflow:hidden; position:relative;}
+ul.tabs li.active {background-color:#191919; border-bottom:1px solid #FFFFFF;}
+
+.tab_container {border:1px solid #eee; border-top:none;  float:left; width:888px;  height:500px; background:#000;}
+
+/*tab 1*/
+.tab_bg1 {float:left; display:block; width:590px; height:500px; border-bottom:1px solid #ffffff; background-image:url("../skillup/lun/bg/skillup_bg.png");}
+.tab_bg1 ul li {float:left; width:70px; height:35px; margin-left:13px; margin-top:30px; padding:0px; font-size:11px;}  
+.tab_bg1 li.s_up_boxsup1 img {border-radius:2px; border:2px solid #ffff33;}
+.tab_bg1 li.s_up_boxsup2 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg1 li.s_up_boxsup3 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg1 li.s_up_boxsup4 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg1 li.s_up_boxsup5 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg1 li.s_up_boxsup6 img {border-radius:2px; border:2px solid #99ff66;}
+.tab_bg1 li.s_up_boxsup7 img {border-radius:2px; border:2px solid #99ff66;}
+
+
+
+/*tab1 right*/
+
+.skillup_right_container {float:left; width:287px; border-left:1px solid #ccc; border-right:1px solid #ccc; }
+
+
+
+.psb_list {width:250px; height:60px; display:block;}
+
+.ri_skill {width:70px; float:left; display:block;}
+
+.psb_name {color:#ffff33; margin-left:5px; margin-right:5px; margin-top:5px; padding:10px; font-size:12px; border:1px solid #ffffff; border-radius:10px 10px 0px 0px;}
+.dbf_name {color:#ff00ff; margin-left:10px; margin-top:13px; padding:10px; font-size:12px; border:1px solid #ffffff; border-radius:10px 10px 0px 0px;}
+.psb_boxs {border:1px solid #ccc; border-radius:5px; height:475px;}
+
+.psb_boxs_help {float:left; display:block;}
+.dbf_boxs_help {float:left; width:150px;}
+.psb_boxs_help span {display:block; font-size:11px;}
+.dbf_boxs_help span {margin-left:10px; display:block; font-size:11px;}
+.box_name1 {color:#ffff33;}
+.box_name2 {color:#ff00ff;}
+li.psb_boxs img {border-radius:2px; border:2px solid #ffff33;}
+li.dbf_boxs img {border-radius:2px; border:2px solid #ff99cc;}
+
+
+/*tab 2*/
+.tab_bg2 {float:left; display:block; width:590px; height:500px; border-bottom:1px solid #ffffff; background-image:url("../skillup/lun/bg/skillup_bg2.png");}
+.tab_bg2 ul li {float:left; width:70px; height:35px; margin-left:13px; margin-top:30px; padding:0px; font-size:11px;}  
+li.s_up_boxsup1 img {border-radius:2px; border:2px solid #ffff33;}
+li.s_up_boxsup2 img {border-radius:2px; border:2px solid #ff99cc;}
+li.s_up_boxsup3 img {border-radius:2px; border:2px solid #ff99cc;}
+li.s_up_boxsup4 img {border-radius:2px; border:2px solid #ff99cc;}
+li.s_up_boxsup5 img {border-radius:2px; border:2px solid #ff99cc;}
+li.s_up_boxsup6 img {border-radius:2px; border:2px solid #99ff66;}
+li.s_up_boxsup7 img {border-radius:2px; border:2px solid #99ff66;}
+
+/*tab 3*/
+.tab_bg3 {float:left; display:block; width:590px; height:500px; border-bottom:1px solid #ffffff; background-image:url("../skillup/lun/bg/skillup_bg3.png");}
+.tab_bg3 ul li {float:left; width:70px; height:35px; margin-left:13px; margin-top:30px; padding:0px; font-size:11px;}  
+.tab_bg3 li.s_up_boxsup1 img {border-radius:2px; border:2px solid #ffff33;}
+.tab_bg3 li.s_up_boxsup2 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg3 li.s_up_boxsup3 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg3 li.s_up_boxsup4 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg3 li.s_up_boxsup5 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg3 li.s_up_boxsup6 img {border-radius:2px; border:2px solid #99ff66;}
+.tab_bg3 li.s_up_boxsup7 img {border-radius:2px; border:2px solid #99ff66;}
+
+/*tab 4*/
+.tab_bg4 {float:left; display:block; width:590px; height:500px; border-bottom:1px solid #ffffff; background-image:url("../skillup/lun/bg/skillup_bg.png");}
+.tab_bg4 ul li {float:left; width:70px; height:35px; margin-left:13px; margin-top:30px; padding:0px; font-size:11px;}  
+.tab_bg4 li.s_up_boxsup1 img {border-radius:2px; border:2px solid #ffff33;}
+.tab_bg4 li.s_up_boxsup2 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg4 li.s_up_boxsup3 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg4 li.s_up_boxsup4 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg4 li.s_up_boxsup5 img {border-radius:2px; border:2px solid #ff99cc;}
+.tab_bg4 li.s_up_boxsup6 img {border-radius:2px; border:2px solid #99ff66;}
+.tab_bg4 li.s_up_boxsup7 img {border-radius:2px; border:2px solid #99ff66;}
