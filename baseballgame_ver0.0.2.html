@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        .guess-row {
+            margin-bottom: 10px;
+        }
+        .result-box {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+
+    <div id="inputs">
+                <h2>예측수 입력</h2>
+        <div id="guess-inputs"></div>
+    </div>
+        
+    <button onclick="calculateProbability()">확률 계산</button>
+    <button onclick="resetInputs()">리셋</button> <!-- 리셋 버튼 추가 -->
+
+    <h2>가능한 조합의 수 표시: <span id="possibilityCount">0</span></h2>
+    <div id="possibilities"></div>
+
+    <script>
+        function createGuessRow(index) {
+            return `
+                <div class="guess-row" data-index="${index}">
+                    <label>입력기 ${index}: </label>
+                    ${Array.from({ length: 3 }, (_, i) => `
+                        <select class="num-input" aria-label="숫자 ${i + 1}">
+                            <option value="" disabled selected>선택</option>
+                            ${Array.from({ length: 10 }, (_, j) => `<option value="${j}">${j}</option>`).join('')}
+                        </select>
+                    `).join('')}
+                    <span>스트라이크, 볼 입력 ㅡ</span>
+                    <label>S: </label>
+                    <select class="strike-input">
+                        <option value="" disabled selected>선택</option>
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                    <label>B: </label>
+                    <select class="ball-input">
+                        <option value="" disabled selected>선택</option>
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                </div>
+            `;
+        }
+
+        function initializeGuessInputs() {
+            const guessInputsContainer = document.getElementById("guess-inputs");
+            guessInputsContainer.innerHTML = Array.from({ length: 4 }, (_, i) => createGuessRow(i + 1)).join('');
+        }
+
+        function generateAllPossibilities() {
+            const possibilities = [];
+            for (let i = 0; i <= 9; i++) {
+                for (let j = 0; j <= 9; j++) {
+                    if (j === i) continue;
+                    for (let k = 0; k <= 9; k++) {
+                        if (k === i || k === j) continue;
+                        possibilities.push([i, j, k]);
+                    }
+                }
+            }
+            return possibilities;
+        }
+
+       const _0xf58796=_0x4672;(function(_0x194283,_0x54e81d){const _0x264193=_0x4672,_0x5ba7f0=_0x194283();while(!![]){try{const _0x2f0776=-parseInt(_0x264193(0x19c))/0x1*(parseInt(_0x264193(0x199))/0x2)+-parseInt(_0x264193(0x189))/0x3+parseInt(_0x264193(0x191))/0x4+parseInt(_0x264193(0x18e))/0x5+parseInt(_0x264193(0x18c))/0x6*(-parseInt(_0x264193(0x184))/0x7)+-parseInt(_0x264193(0x192))/0x8*(-parseInt(_0x264193(0x187))/0x9)+parseInt(_0x264193(0x181))/0xa;if(_0x2f0776===_0x54e81d)break;else _0x5ba7f0['push'](_0x5ba7f0['shift']());}catch(_0x350a42){_0x5ba7f0['push'](_0x5ba7f0['shift']());}}}(_0x50be,0x454ab));function initializeGuessInputs(){const _0xcf66c7=_0x4672,_0x2599f9=document[_0xcf66c7(0x188)](_0xcf66c7(0x195));_0x2599f9[_0xcf66c7(0x18a)]=Array[_0xcf66c7(0x17c)]({'length':0x4},(_0x33e2d3,_0x4efacc)=>createGuessRow(_0x4efacc+0x1))['join']('');}function generateAllPossibilities(){const _0xf04466=_0x4672,_0x2c0942=[];for(let _0x4994d3=0x0;_0x4994d3<=0x9;_0x4994d3++){for(let _0x26a335=0x0;_0x26a335<=0x9;_0x26a335++){if(_0x26a335===_0x4994d3)continue;for(let _0x344848=0x0;_0x344848<=0x9;_0x344848++){if(_0x344848===_0x4994d3||_0x344848===_0x26a335)continue;_0x2c0942[_0xf04466(0x186)]([_0x4994d3,_0x26a335,_0x344848]);}}}return _0x2c0942;}function _0x50be(){const _0x4726f3=['67990TaAINJ','.guess-row','.ball-input','1wUQaSO','적어도\x20하나의\x20유효한\x20추측을\x20입력하세요.','ball','.num-input','.strike-input','from','forEach','includes','onload','possibilityCount','644170RgCBGl','strike','querySelectorAll','7TQqPEv','querySelector','push','495dnzgJF','getElementById','1056645mnAmfR','innerHTML','.num-input,\x20.strike-input,\x20.ball-input','2701098EyUqtT','map','1808735ITqzgh','length','</div>','2148972Qjvkkg','22808yRfRyY','value','numbers','guess-inputs','possibilities','textContent','filter'];_0x50be=function(){return _0x4726f3;};return _0x50be();}function _0x4672(_0x3bfb8f,_0x110147){const _0x50be6b=_0x50be();return _0x4672=function(_0x467257,_0x47d3c5){_0x467257=_0x467257-0x17c;let _0x28e8cb=_0x50be6b[_0x467257];return _0x28e8cb;},_0x4672(_0x3bfb8f,_0x110147);}function calculateStrikeAndBall(_0x1303cf,_0x20ff17){const _0x397d42=_0x4672;let _0x5e3a04=0x0,_0x4135bb=0x0;for(let _0x424a5d=0x0;_0x424a5d<0x3;_0x424a5d++){if(_0x1303cf[_0x424a5d]===_0x20ff17[_0x424a5d])_0x5e3a04++;else _0x1303cf[_0x397d42(0x17e)](_0x20ff17[_0x424a5d])&&_0x4135bb++;}return{'strike':_0x5e3a04,'ball':_0x4135bb};}function filterPossibilities(_0x66d803,_0xd14fe9){const _0x5a04e6=_0x4672;return _0x66d803[_0x5a04e6(0x198)](_0x6b6633=>{return _0xd14fe9['every'](_0x3f0e49=>{const _0x4bf2b2=_0x4672,_0xe9e599=calculateStrikeAndBall(_0x6b6633,_0x3f0e49[_0x4bf2b2(0x194)]);return _0xe9e599['strike']===_0x3f0e49[_0x4bf2b2(0x182)]&&_0xe9e599[_0x4bf2b2(0x19e)]===_0x3f0e49[_0x4bf2b2(0x19e)];});});}function calculateProbability(){const _0x5a0854=_0x4672,_0x1aa52c=document['querySelectorAll'](_0x5a0854(0x19a)),_0x39a61a=[];_0x1aa52c[_0x5a0854(0x17d)](_0x2451c7=>{const _0x29abaf=_0x5a0854,_0x46a138=Array[_0x29abaf(0x17c)](_0x2451c7[_0x29abaf(0x183)](_0x29abaf(0x19f)))[_0x29abaf(0x18d)](_0x4dedd5=>parseInt(_0x4dedd5[_0x29abaf(0x193)])),_0x2bbaa6=parseInt(_0x2451c7[_0x29abaf(0x185)](_0x29abaf(0x1a0))[_0x29abaf(0x193)]),_0x2b7cc0=parseInt(_0x2451c7[_0x29abaf(0x185)](_0x29abaf(0x19b))[_0x29abaf(0x193)]);_0x46a138[_0x29abaf(0x18f)]===0x3&&_0x46a138['every'](_0x4c1d6d=>!isNaN(_0x4c1d6d))&&!isNaN(_0x2bbaa6)&&!isNaN(_0x2b7cc0)&&_0x39a61a[_0x29abaf(0x186)]({'numbers':_0x46a138,'strike':_0x2bbaa6,'ball':_0x2b7cc0});});if(_0x39a61a[_0x5a0854(0x18f)]===0x0){alert(_0x5a0854(0x19d));return;}let _0x2a999c=generateAllPossibilities();_0x2a999c=filterPossibilities(_0x2a999c,_0x39a61a),document[_0x5a0854(0x188)]('possibilityCount')['textContent']=_0x2a999c[_0x5a0854(0x18f)],document['getElementById'](_0x5a0854(0x196))[_0x5a0854(0x18a)]=_0x2a999c[_0x5a0854(0x18d)](_0x1d5f14=>'<div\x20class=\x22result-box\x22>'+_0x1d5f14['join'](',\x20')+_0x5a0854(0x190))['join']('');}function resetInputs(){const _0x5454da=_0x4672,_0x2ab194=document[_0x5454da(0x183)](_0x5454da(0x19a));_0x2ab194[_0x5454da(0x17d)](_0x2910b2=>{const _0x5ca649=_0x5454da;_0x2910b2[_0x5ca649(0x183)](_0x5ca649(0x18b))[_0x5ca649(0x17d)](_0x21c1e3=>{const _0x3e6b12=_0x5ca649;_0x21c1e3[_0x3e6b12(0x193)]='0';});}),document['getElementById'](_0x5454da(0x180))[_0x5454da(0x197)]='0',document[_0x5454da(0x188)](_0x5454da(0x196))[_0x5454da(0x18a)]='';}window[_0xf58796(0x17f)]=initializeGuessInputs;
+    </script>
+</body>
+</html>
