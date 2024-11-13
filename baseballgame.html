@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>숫자 야구 게임 확률  예측기</title>
+    <style>
+        .guess-row {
+            margin-bottom: 10px;
+        }
+        .result-box {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        ul.manual {list-style-type: none;}
+        .red {color: red;}
+        .bule {color: blue;}
+    </style>
+</head>
+<body>
+
+    <div id="inputs">
+      
+        <h2>예측수 입력</h2>
+        <div id="guess-inputs"></div>
+    </div>
+        
+    <button onclick="calculateProbability()">확률 계산</button>
+    <button onclick="resetInputs()">리셋</button> <!-- 리셋 버튼 추가 -->
+
+    <h2>가능한 조합의 수 표시: <span id="possibilityCount">0</span></h2>
+    <div id="possibilities"></div>
+
+    <script>
+         function createGuessRow(index) {
+            return `
+                <div class="guess-row" data-index="${index}">
+                    <label>입력기 ${index}: </label>
+                    ${Array.from({ length: 3 }, (_, i) => `
+                        <select class="num-input" aria-label="숫자 ${i + 1}">
+                            ${Array.from({ length: 10 }, (_, j) => `<option value="${j}">${j}</option>`).join('')}
+                        </select>
+                    `).join('')}
+                    <span>스트라이크, 볼 입력 ㅡ</span>
+                    <label>S: </label>
+                    <select class="strike-input">
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                    <label>B: </label>
+                    <select class="ball-input">
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                </div>
+            `;
+        }
+     eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('g C(){8 D=d.m("e-S");D.x=E.F({o:4},(T,i)=>U(i+1)).y(\'\')}g G(){8 2=[];q(f i=0;i<=9;i++){q(f j=0;j<=9;j++){h(j===i)H;q(f k=0;k<=9;k++){h(k===i||k===j)H;2.I([i,j,k])}}}l 2}g J(a,b){f 5=0;f 6=0;q(f i=0;i<3;i++){h(a[i]===b[i]){5++}V h(a.W(b[i])){6++}}l{5,6}}g K(a,b){l a.X(L=>{l b.M(e=>{8 r=J(L,e.n);l r.5===e.5&&r.6===e.6})})}g Y(){8 s=d.t(".e-c");8 u=[];s.z(c=>{8 n=E.F(c.t(".v-7")).N(7=>A(7.w));8 5=A(c.O(".5-7").w);8 6=A(c.O(".6-7").w);h(n.o===3&&n.M(v=>!B(v))&&!B(5)&&!B(6)){u.I({n,5,6})}});h(u.o===0){Z("적어도 하나의 유효한 추측을 입력하세요.");l}f 2=G();2=K(2,u);d.m("P").Q=2.o;d.m("2").x=2.N(p=>`<R 10="r-11">${p.y(", ")}</R>`).y("")}g 12(){8 s=d.t(".e-c");s.z(c=>{c.t(".v-7, .5-7, .6-7").z(7=>{7.w="0"})});d.m("P").Q="0";d.m("2").x=""}13.14=C;',62,67,'||possibilities|||strike|ball|input|const||||row|document|guess|let|function|if||||return|getElementById|numbers|length||for|result|guessRows|querySelectorAll|guesses|num|value|innerHTML|join|forEach|parseInt|isNaN|initializeGuessInputs|guessInputsContainer|Array|from|generateAllPossibilities|continue|push|calculateStrikeAndBall|filterPossibilities|possibility|every|map|querySelector|possibilityCount|textContent|div|inputs|_|createGuessRow|else|includes|filter|calculateProbability|alert|class|box|resetInputs|window|onload'.split('|'),0,{}))
+
+    </script>
+</body>
+</html>
