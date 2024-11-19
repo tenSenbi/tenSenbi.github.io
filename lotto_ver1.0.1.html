@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .lotto-board {
+            display: inline-block;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            background-color: #f9f9f9;
+        }
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 30px);
+            grid-gap: 5px;
+            justify-content: center;
+        }
+        .number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .selected {
+            background-color: #ffcccb;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>로또 랜덤 생성기</h1>
+    <button onclick="updateSelectedColors()">랜덤 생성</button>
+    <div id="lottoContainer">
+        <!-- 5개의 세트를 동적으로 생성 -->
+    </div>
+
+    <script>
+        const _0x3d5e8c=_0x50cb;function _0x327f(){const _0x4e3802=['3135664mNKSLy','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','57729mttehZ','querySelectorAll','from','13300050TVsHlz','innerHTML','1789956hbfvfd','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h2>게임\x20','1215992QYuFNY','2268321PFTYQk','5ZPoDht','remove','add','forEach','<div\x20class=\x22number\x22>','3894306BHFQWh','</div>','appendChild','lottoContainer','join','selected','onload','random','lotto-board','2cHkpHC','floor','9VMhfmK','classList','length','createElement'];_0x327f=function(){return _0x4e3802;};return _0x327f();}function _0x50cb(_0x2f75ee,_0x4f2f17){const _0x327f49=_0x327f();return _0x50cb=function(_0x50cb84,_0x3a59ed){_0x50cb84=_0x50cb84-0x169;let _0x275460=_0x327f49[_0x50cb84];return _0x275460;},_0x50cb(_0x2f75ee,_0x4f2f17);}(function(_0x1a1201,_0x4e839e){const _0x3c81eb=_0x50cb,_0x2437fc=_0x1a1201();while(!![]){try{const _0x37e334=-parseInt(_0x3c81eb(0x16f))/0x1+parseInt(_0x3c81eb(0x186))/0x2*(parseInt(_0x3c81eb(0x177))/0x3)+parseInt(_0x3c81eb(0x16d))/0x4+-parseInt(_0x3c81eb(0x178))/0x5*(-parseInt(_0x3c81eb(0x17d))/0x6)+-parseInt(_0x3c81eb(0x174))/0x7+-parseInt(_0x3c81eb(0x176))/0x8+-parseInt(_0x3c81eb(0x169))/0x9*(parseInt(_0x3c81eb(0x172))/0xa);if(_0x37e334===_0x4e839e)break;else _0x2437fc['push'](_0x2437fc['shift']());}catch(_0x7dccd5){_0x2437fc['push'](_0x2437fc['shift']());}}}(_0x327f,0x601a1));function createLottoSets(){const _0x3c6054=_0x50cb,_0x5b1afb=document['getElementById'](_0x3c6054(0x180));for(let _0x4629a5=0x1;_0x4629a5<=0x5;_0x4629a5++){const _0xa348b1=document[_0x3c6054(0x16c)]('div');_0xa348b1[_0x3c6054(0x16a)][_0x3c6054(0x17a)](_0x3c6054(0x185)),_0xa348b1[_0x3c6054(0x173)]=_0x3c6054(0x175)+_0x4629a5+'</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22number-grid\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Array[_0x3c6054(0x171)]({'length':0x2d},(_0x440256,_0x572fb9)=>_0x3c6054(0x17c)+(_0x572fb9+0x1)+_0x3c6054(0x17e))[_0x3c6054(0x181)]('')+_0x3c6054(0x16e),_0x5b1afb[_0x3c6054(0x17f)](_0xa348b1);}}function updateSelectedColors(){const _0x3d6f3f=_0x50cb,_0x53aaca=document[_0x3d6f3f(0x170)]('.lotto-board\x20.number-grid');_0x53aaca[_0x3d6f3f(0x17b)](_0xd36bba=>{const _0x1861e8=_0x3d6f3f,_0x18363c=_0xd36bba['querySelectorAll']('.number');_0x18363c[_0x1861e8(0x17b)](_0x4ff3a2=>_0x4ff3a2[_0x1861e8(0x16a)][_0x1861e8(0x179)]('selected'));const _0x4a2402=[];while(_0x4a2402['length']<0x6){const _0x513ea9=Math[_0x1861e8(0x187)](Math[_0x1861e8(0x184)]()*_0x18363c[_0x1861e8(0x16b)]);!_0x4a2402['includes'](_0x513ea9)&&_0x4a2402['push'](_0x513ea9);}_0x4a2402['forEach'](_0xafcdc6=>{const _0x28707c=_0x1861e8;_0x18363c[_0xafcdc6][_0x28707c(0x16a)]['add'](_0x28707c(0x182));});});}window[_0x3d5e8c(0x183)]=createLottoSets;
+        </script>
+</body>
+</html>
