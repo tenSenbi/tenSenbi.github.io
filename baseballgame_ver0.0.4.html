@@ -24,6 +24,29 @@
         .red {color: red;}
         .bule {color: blue;}
     </style>
+    <!-- 불펌 클릭방지 소스 시작 //-->
+     <script type="text/javascript">
+          var omitformtags=["input", "textarea", "select"]
+          omitformtags=omitformtags.join("|")
+
+          function disableselect(e){
+               if (omitformtags.indexOf(e.target.tagName.toLowerCase())==-1)
+               return false
+          }
+
+          function reEnable(){
+               return true
+          }
+
+          if (typeof document.onselectstart!="undefined")
+              document.onselectstart=new Function ("return false")
+          else{
+              document.onmousedown=disableselect
+              document.onmouseup=reEnable
+          }
+</script>
+<!-- 불펌 클릭방지 소스 종료 //-->
+<!-- 우클방지 종료 //-->
 </head>
 <body>
     <h1>숫자 야구 게임 확률 계산기</h1>
