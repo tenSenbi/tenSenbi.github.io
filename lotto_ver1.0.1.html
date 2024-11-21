@@ -38,6 +38,28 @@
             font-weight: bold;
         }
     </style>
+    <!-- 불펌 클릭방지 소스 시작 //-->
+     <script type="text/javascript">
+          var omitformtags=["input", "textarea", "select"]
+          omitformtags=omitformtags.join("|")
+
+          function disableselect(e){
+               if (omitformtags.indexOf(e.target.tagName.toLowerCase())==-1)
+               return false
+          }
+
+          function reEnable(){
+               return true
+          }
+
+          if (typeof document.onselectstart!="undefined")
+              document.onselectstart=new Function ("return false")
+          else{
+              document.onmousedown=disableselect
+              document.onmouseup=reEnable
+          }
+</script>
+<!-- 불펌 클릭방지 소스 종료 //-->
 </head>
 <body>
     <h1>로또 랜덤 생성기</h1>
