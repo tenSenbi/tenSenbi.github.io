@@ -5,155 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숫자 야구 게임 확률 계산기</title>
 <style>
-
-:root {
-    --bg: #050816;
-    --card: #101826;
-    --accent: #00e0ff;
-    --accent-soft: rgba(0, 224, 255, 0.15);
-    --text-main: #f5f7ff;
-    --text-sub: #a4b1d2;
-}
-
+/* ===== 기본 리셋 ===== */
 * {
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 16px;
-    background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
-    color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    margin: 10px;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: #111;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-h1 {
-    font-size: 1.8rem;
-    margin: 0 0 0.5rem;
+/* 제목 여백 최소화 */
+h1, h2 {
+    margin: 6px 0 10px 0;
     font-weight: 700;
 }
 
-h2 {
-    font-size: 1.05rem;
-    margin: 1.2rem 0 0.4rem;
-    color: var(--text-sub);
-    font-weight: 600;
-}
-
-#inputs {
-    margin-top: 1rem;
-}
-
+/* ===== 입력 줄 (한 줄 유지) ===== */
 .guess-row {
-    background: linear-gradient(135deg, #0b1020, #050816);
-    border-radius: 14px;
-    padding: 10px 12px;
-    margin-bottom: 10px;
-    display: flex !important;
-    flex-wrap: nowrap !important; /* 절대 줄바꿈 안 함 */
+    display: flex;
+    flex-wrap: nowrap;          /* 절대 줄바꿈 금지 */
     align-items: center;
     gap: 6px;
-    overflow-x: auto; /* 공간 부족하면 가로 스크롤만 허용 */
+    margin-bottom: 8px;
+
+    overflow-x: auto;           /* 화면 좁으면 가로 스크롤만 */
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(148, 163, 184, 0.18);
 }
 
-.guess-row::-webkit-scrollbar { display: none; }
-
-.guess-row label {
-    font-size: 0.9rem;
-    color: var(--text-sub);
-    white-space: nowrap;
+.guess-row::-webkit-scrollbar {
+    display: none;              /* 스크롤바 숨김 */
 }
 
+/* 숫자 고정 체크박스 */
 .fix-checkbox {
-    transform: scale(1.1);
-    margin-right: 4px;
-    accent-color: var(--accent);
+    transform: scale(1.15);
 }
 
-/* >>>>>>>>>>> select 고정폭 (모바일/PC 모두) <<<<<<<< */
-.num-input,
-.strike-input,
-.ball-input {
-    background: #020617;
-    border: 1px solid #1f2937;
-    color: var(--text-main);
-    border-radius: 10px;
-    padding: 6px 8px;
-    font-size: 1rem;
-
-    width: 75px !important;
-    min-width: 75px !important;
-    max-width: 75px !important;
-    height: 42px !important;
+/* ===== 숫자 select 고정 크기 ===== */
+.num-input {
+    width: 60px !important;     /* PC/모바일 동일 고정 */
+    min-width: 60px !important;
+    max-width: 60px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
 
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
 }
 
-/* 버튼 스타일 */
+/* ===== 스트라이크/볼 S/B select ===== */
+.strike-input,
+.ball-input {
+    width: 55px !important;     
+    min-width: 55px !important;
+    max-width: 55px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+}
+
+/* ===== 버튼 ===== */
 button {
     border: none;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-size: 0.96rem;
-    font-weight: 600;
+    background: #333;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 12px;
-    margin-right: 10px;
-    transition: 0.06s;
-    user-select: none;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #444;
 }
 
 button:active {
     transform: scale(0.97);
-    filter: brightness(0.95);
 }
 
-.primary {
-    background: linear-gradient(135deg, #00e0ff, #007bff);
-    color: #020617;
-    box-shadow: 0 8px 20px rgba(0, 224, 255, 0.35);
-}
-
-.secondary {
-    background: #020617;
-    color: var(--text-main);
-    border: 1px solid #1f2937;
+/* ===== 조합 결과 박스 ===== */
+#possibilities {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
 }
 
 .result-box {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
+    width: 50px;
+    height: 50px;
     margin: 4px;
-    background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
-    border: 1px solid #1f2937;
-    color: var(--accent);
-    font-weight: 600;
-    font-size: 1.05rem;
+    background: #222;
+    color: #0ff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+    border: 1px solid #444;
 }
 
-#possibilities {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 14px;
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(148, 163, 184, 0.18);
+.result-box:hover {
+    background: #333;
 }
+
+/* 모바일에서도 동일 UI 유지 (줄바꿈 절대 없음) */
+@media (max-width: 480px) {
+    .guess-row {
+        flex-wrap: nowrap !important;
+    }
+}
+
 </style>
 
 </head>
@@ -179,5 +154,6 @@ button:active {
 
 </body>
 </html>
+
 
 
