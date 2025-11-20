@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구 게임 확률 계산기 (개선 버전)</title>
+<style>
+
+/* ===== 기본 리셋 ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 10px;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: #111;
+}
+
+/* 제목 여백 최소화 */
+h1, h2 {
+    margin: 6px 0 10px 0;
+    font-weight: 700;
+}
+
+/* ========================== 입력 줄 스타일 ========================== */
+.guess-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #929292;
+}
+
+/* 숫자 입력 블록 */
+.row-main {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+}
+
+/* S/B 입력 블록 */
+.row-sb {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+/* 숫자 고정 체크박스 */
+.fix-checkbox {
+    transform: scale(1.1);
+}
+
+/* ========================== Select 크기 고정 ========================== */
+.num-input {
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    flex-shrink: 0 !important;
+}
+
+.strike-input,
+.ball-input {
+    width: 55px !important;
+    min-width: 55px !important;
+    max-width: 55px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    flex-shrink: 0 !important;
+}
+
+/* ========================== 버튼 ========================== */
+button {
+    border: none;
+    background: #333;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #444;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* ========================== 조합 결과 박스 ========================== */
+#possibilities {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+
+.result-box {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+    background: #222;
+    color: #0ff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #444;
+}
+
+.result-box:hover {
+    background: #333;
+}
+
+/* ========================== 반응형 ========================== */
+@media (max-width: 480px) {
+    .guess-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .row-main,
+    .row-sb {
+        flex-wrap: wrap;
+    }
+}
+
+/* 버튼 그룹 */
+.button-row {
+    display: flex;
+    gap: 20px;         
+    margin: 10px 0;
+}
+
+.reset-btn {
+    margin-left: 20px;
+    background: #e02121;
+}
+
+.reset-btn:hover {
+    background: #9e5e5e;
+}
+
+.primary {
+    background: linear-gradient(135deg, #0c98f5, #007cff);
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 150, 255, 0.35);
+    transition: 0.15s ease;
+}
+
+</style>
+
+<script type="text/javascript">
+  document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+  });
+</script>
+<script type="text/javascript">
+  var omitformtags=["input", "textarea", "select"]
+  omitformtags=omitformtags.join("|")
+
+  function disableselect(e){
+    if (omitformtags.indexOf(e.target.tagName.toLowerCase())==-1)
+    return false
+  }
+
+  function reEnable(){
+    return true
+  }
+
+  if (typeof document.onselectstart!="undefined")
+    document.onselectstart=new Function ("return false")
+  else{
+    document.onmousedown=disableselect
+    document.onmouseup=reEnable
+  }
+</script>
+</head>
+<body>
+<div class="container">
+    <h1>숫자 야구 게임 확률 계산기</h1>
+
+    <div id="inputs">
+        <h2>예측수 입력</h2>
+        <div id="guess-inputs"></div>
+    </div>
+        
+    <div class="button-row">
+        <button class="primary" onclick="calculateProbability()">확률 계산</button>
+        <button class="secondary reset-btn" onclick="resetInputs()">리셋</button>
+    </div>
+
+    <h2>가능한 조합의 수 표시: <span id="possibilityCount">0</span></h2>
+    <div id="possibilities"></div>
+</div>
+
+<script>
+    const _0x3b62ba=_0x336d;(function(_0x435bf2,_0x42d363){const _0x53edc1=_0x336d,_0x9df8ff=_0x435bf2();while(!![]){try{const _0x29f716=-parseInt(_0x53edc1(0x1a3))/0x1+parseInt(_0x53edc1(0x19a))/0x2+-parseInt(_0x53edc1(0x1a6))/0x3*(-parseInt(_0x53edc1(0x1cd))/0x4)+-parseInt(_0x53edc1(0x1cc))/0x5*(-parseInt(_0x53edc1(0x1bc))/0x6)+-parseInt(_0x53edc1(0x1c7))/0x7+-parseInt(_0x53edc1(0x1a5))/0x8*(-parseInt(_0x53edc1(0x1ac))/0x9)+-parseInt(_0x53edc1(0x1ce))/0xa*(parseInt(_0x53edc1(0x188))/0xb);if(_0x29f716===_0x42d363)break;else _0x9df8ff['push'](_0x9df8ff['shift']());}catch(_0xf911ca){_0x9df8ff['push'](_0x9df8ff['shift']());}}}(_0x2728,0x3ce71));const _0x2da430=(function(){let _0x2311bc=!![];return function(_0xaec6b7,_0x3263da){const _0x3af81a=_0x2311bc?function(){if(_0x3263da){const _0x1302df=_0x3263da['apply'](_0xaec6b7,arguments);return _0x3263da=null,_0x1302df;}}:function(){};return _0x2311bc=![],_0x3af81a;};}()),_0x3f0b9e=_0x2da430(this,function(){const _0x3a1564=_0x336d;return _0x3f0b9e[_0x3a1564(0x194)]()[_0x3a1564(0x1b2)]('(((.+)+)+)+$')[_0x3a1564(0x194)]()[_0x3a1564(0x185)](_0x3f0b9e)['search'](_0x3a1564(0x1a1));});_0x3f0b9e();const _0xb08806=(function(){let _0x7ad96c=!![];return function(_0x4ae218,_0x55543a){const _0x35fefd=_0x7ad96c?function(){const _0x5e0949=_0x336d;if(_0x55543a){const _0x3f9e13=_0x55543a[_0x5e0949(0x198)](_0x4ae218,arguments);return _0x55543a=null,_0x3f9e13;}}:function(){};return _0x7ad96c=![],_0x35fefd;};}()),_0x5bb00b=_0xb08806(this,function(){const _0x2a5210=_0x336d,_0x52853f=function(){const _0x1972e0=_0x336d;let _0x2a99f3;try{_0x2a99f3=Function(_0x1972e0(0x18a)+_0x1972e0(0x182)+');')();}catch(_0x4796de){_0x2a99f3=window;}return _0x2a99f3;},_0x37709f=_0x52853f(),_0x5d2684=_0x37709f['console']=_0x37709f[_0x2a5210(0x1b9)]||{},_0x37a5e1=[_0x2a5210(0x1c6),_0x2a5210(0x1b6),_0x2a5210(0x1a4),_0x2a5210(0x186),_0x2a5210(0x195),_0x2a5210(0x1bd),_0x2a5210(0x1cf)];for(let _0x353876=0x0;_0x353876<_0x37a5e1[_0x2a5210(0x1c2)];_0x353876++){const _0x557999=_0xb08806['constructor'][_0x2a5210(0x199)][_0x2a5210(0x1bb)](_0xb08806),_0x3d4d87=_0x37a5e1[_0x353876],_0x2f7557=_0x5d2684[_0x3d4d87]||_0x557999;_0x557999[_0x2a5210(0x1ab)]=_0xb08806[_0x2a5210(0x1bb)](_0xb08806),_0x557999['toString']=_0x2f7557[_0x2a5210(0x194)]['bind'](_0x2f7557),_0x5d2684[_0x3d4d87]=_0x557999;}});_0x5bb00b();function _0x2728(){const _0x25fb86=['751098BpBYLV','table','는\x203을\x20초과할\x20수\x20없습니다.','[입력','랜덤\x20생성\x20숫자가\x20부족합니다.','innerHTML','length','textContent','.guess-row','querySelector','log','585655pWNMaK','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22row-sb\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>S,\x20B입력\x20ㅡ</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>S:</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<select\x20class=\x22strike-input\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22\x22\x20disabled\x20selected>선택</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','index','ball','5GFNrLk','16WhZnTU','170630JxpLKj','trace','{}.constructor(\x22return\x20this\x22)(\x20)','<option\x20value=\x22','from','constructor','error','push','11zFfDrj','join','return\x20(function()\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','map','strike','filter','some','\x20오류]\x0a추측\x20숫자\x20\x27','has','dataset','toString','exception','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22guess-row\x22\x20data-index=\x22','checked','apply','prototype','108344ortEyL','possibilities','</option>','random','splice','onload','.fix-checkbox','(((.+)+)+)+$','selectedIndex','311818GQPqRZ','info','322720eLlZhT','331731AYGrAT',')\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',')\x20=\x20','\x20오류]\x0a3\x20스트라이크일\x20때\x20볼은\x200이어야\x20합니다.','querySelectorAll','__proto__','9wcUZOU','.num-input','value',':</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','every','.ball-input','search','getElementById','.strike-input','possibilityCount','warn','적어도\x20하나의\x20유효한\x20추측을\x20입력하세요.','forEach','console','size','bind'];_0x2728=function(){return _0x25fb86;};return _0x2728();}function createGuessRow(_0x500db0){const _0x4e434d=_0x336d,_0xa79c7c=_0x500db0===0x1||_0x500db0===0x2?'<input\x20type=\x22checkbox\x22\x20class=\x22fix-checkbox\x22>고정\x20':'';return _0x4e434d(0x196)+_0x500db0+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22row-main\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>입력'+_0x500db0+_0x4e434d(0x1af)+_0xa79c7c+_0x4e434d(0x18b)+Array['from']({'length':0x3},()=>'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<select\x20class=\x22num-input\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22\x22\x20disabled\x20selected>선택</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Array['from']({'length':0xa},(_0x970fd6,_0x306c90)=>'<option\x20value=\x22'+_0x306c90+'\x22>'+_0x306c90+_0x4e434d(0x19c))[_0x4e434d(0x189)]('')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20')[_0x4e434d(0x189)]('')+_0x4e434d(0x1c8)+Array['from']({'length':0x4},(_0x2c87fe,_0x4e61fe)=>_0x4e434d(0x183)+_0x4e61fe+'\x22>'+_0x4e61fe+_0x4e434d(0x19c))[_0x4e434d(0x189)]('')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>B:</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<select\x20class=\x22ball-input\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22\x22\x20disabled\x20selected>선택</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Array[_0x4e434d(0x184)]({'length':0x4},(_0x4acc22,_0x40c692)=>_0x4e434d(0x183)+_0x40c692+'\x22>'+_0x40c692+'</option>')['join']('')+_0x4e434d(0x18c);}function applyRandomToFirstTwo_WithFixCheck(){const _0x263218=_0x336d,_0x532cc8=document[_0x263218(0x1aa)]('.guess-row');if(_0x532cc8[_0x263218(0x1c2)]<0x2)return;const _0x32daee=_0x532cc8[0x0],_0x443493=_0x532cc8[0x1],_0x2b589c=_0x32daee[_0x263218(0x1c5)](_0x263218(0x1a0))['checked'],_0x33ae56=_0x443493[_0x263218(0x1c5)](_0x263218(0x1a0))[_0x263218(0x197)],_0x50949d=_0x32daee[_0x263218(0x1aa)](_0x263218(0x1ad)),_0x853ba8=_0x443493[_0x263218(0x1aa)](_0x263218(0x1ad)),_0x4106a8=new Set();_0x2b589c&&_0x50949d[_0x263218(0x1b8)](_0x1a065d=>{const _0x317c90=_0x263218,_0x5f2acf=parseInt(_0x1a065d[_0x317c90(0x1ae)]);if(!isNaN(_0x5f2acf))_0x4106a8['add'](_0x5f2acf);});_0x33ae56&&_0x853ba8['forEach'](_0x6c6d48=>{const _0x79750=_0x263218,_0x44a976=parseInt(_0x6c6d48[_0x79750(0x1ae)]);if(!isNaN(_0x44a976))_0x4106a8['add'](_0x44a976);});let _0x19d8df=[];if(!_0x2b589c)_0x19d8df[_0x263218(0x187)](..._0x50949d);if(!_0x33ae56)_0x19d8df['push'](..._0x853ba8);if(_0x19d8df[_0x263218(0x1c2)]===0x0)return;const _0x328198=[];for(let _0x35d77e=0x0;_0x35d77e<=0x9;_0x35d77e++){if(!_0x4106a8[_0x263218(0x192)](_0x35d77e))_0x328198[_0x263218(0x187)](_0x35d77e);}if(_0x328198[_0x263218(0x1c2)]<_0x19d8df['length']){console[_0x263218(0x186)](_0x263218(0x1c0));return;}const _0x2be363=[],_0x23de84=[..._0x328198];for(let _0x506c83=0x0;_0x506c83<_0x19d8df[_0x263218(0x1c2)];_0x506c83++){const _0x2a5455=Math['floor'](Math[_0x263218(0x19d)]()*_0x23de84[_0x263218(0x1c2)]);_0x2be363[_0x263218(0x187)](_0x23de84[_0x2a5455]),_0x23de84[_0x263218(0x19e)](_0x2a5455,0x1);}_0x19d8df[_0x263218(0x1b8)]((_0x5d3d0b,_0x2da16b)=>{_0x5d3d0b['value']=_0x2be363[_0x2da16b];});}function initializeGuessInputs(){const _0x363f2c=_0x336d,_0x46598a=document[_0x363f2c(0x1b3)]('guess-inputs');_0x46598a[_0x363f2c(0x1c1)]=Array[_0x363f2c(0x184)]({'length':0x4},(_0x2bf375,_0x2efaf7)=>createGuessRow(_0x2efaf7+0x1))['join'](''),applyRandomToFirstTwo_WithFixCheck();}function generateAllPossibilities(){const _0x308df4=_0x336d,_0x2f0a71=[];for(let _0x2e4126=0x0;_0x2e4126<=0x9;_0x2e4126++){for(let _0x2eeb20=0x0;_0x2eeb20<=0x9;_0x2eeb20++){if(_0x2eeb20===_0x2e4126)continue;for(let _0x108038=0x0;_0x108038<=0x9;_0x108038++){if(_0x108038===_0x2e4126||_0x108038===_0x2eeb20)continue;_0x2f0a71[_0x308df4(0x187)]([_0x2e4126,_0x2eeb20,_0x108038]);}}}return _0x2f0a71;}function calculateStrikeAndBall(_0x1251c9,_0x35e8b2){let _0x4d3d6f=0x0,_0x58e969=0x0;for(let _0x3857ec=0x0;_0x3857ec<0x3;_0x3857ec++){if(_0x1251c9[_0x3857ec]===_0x35e8b2[_0x3857ec])_0x4d3d6f++;else{if(_0x1251c9['includes'](_0x35e8b2[_0x3857ec]))_0x58e969++;}}return{'strike':_0x4d3d6f,'ball':_0x58e969};}function filterPossibilities(_0xce797a,_0x51d5f2){const _0x483ba4=_0x336d;return _0xce797a[_0x483ba4(0x18f)](_0x64754c=>{return _0x51d5f2['every'](_0x32bbdb=>{const _0x30a382=_0x336d,_0x3c18cb=calculateStrikeAndBall(_0x64754c,_0x32bbdb['numbers']);return _0x3c18cb[_0x30a382(0x18e)]===_0x32bbdb[_0x30a382(0x18e)]&&_0x3c18cb[_0x30a382(0x1cb)]===_0x32bbdb['ball'];});});}function isGuessValid(_0x40c722){const _0x49cb2d=_0x336d;return new Set(_0x40c722)[_0x49cb2d(0x1ba)]===_0x40c722[_0x49cb2d(0x1c2)];}function calculateProbability(){const _0x2944e3=_0x336d,_0x197b1b=document[_0x2944e3(0x1aa)](_0x2944e3(0x1c4)),_0x446cb8=[];for(const _0x448447 of _0x197b1b){const _0x34f60a=Array[_0x2944e3(0x184)](_0x448447[_0x2944e3(0x1aa)](_0x2944e3(0x1ad)))[_0x2944e3(0x18d)](_0xa906e3=>parseInt(_0xa906e3['value'])),_0x55501d=parseInt(_0x448447[_0x2944e3(0x1c5)](_0x2944e3(0x1b4))[_0x2944e3(0x1ae)]),_0x492ba1=parseInt(_0x448447[_0x2944e3(0x1c5)](_0x2944e3(0x1b1))[_0x2944e3(0x1ae)]),_0x3577c9=_0x448447[_0x2944e3(0x193)][_0x2944e3(0x1ca)];if(_0x34f60a[_0x2944e3(0x1b0)](_0x19d8d5=>!isNaN(_0x19d8d5))&&!isNaN(_0x55501d)&&!isNaN(_0x492ba1)){if(!isGuessValid(_0x34f60a)){alert(_0x2944e3(0x1bf)+_0x3577c9+_0x2944e3(0x191)+_0x34f60a['join'](',\x20')+'\x27에\x20중복이\x20있습니다.\x0a서로\x20다른\x20숫자를\x20입력해주세요.');return;}if(_0x55501d+_0x492ba1>0x3){alert(_0x2944e3(0x1bf)+_0x3577c9+'\x20오류]\x0aS('+_0x55501d+')\x20+\x20B('+_0x492ba1+_0x2944e3(0x1a8)+(_0x55501d+_0x492ba1)+_0x2944e3(0x1be));return;}if(_0x55501d===0x3&&_0x492ba1!==0x0){alert(_0x2944e3(0x1bf)+_0x3577c9+_0x2944e3(0x1a9));return;}_0x446cb8[_0x2944e3(0x187)]({'numbers':_0x34f60a,'strike':_0x55501d,'ball':_0x492ba1});}}if(_0x446cb8[_0x2944e3(0x1c2)]===0x0){alert(_0x2944e3(0x1b7));return;}let _0x30ef99=generateAllPossibilities();_0x30ef99=filterPossibilities(_0x30ef99,_0x446cb8),document['getElementById'](_0x2944e3(0x1b5))[_0x2944e3(0x1c3)]=_0x30ef99[_0x2944e3(0x1c2)],document[_0x2944e3(0x1b3)]('possibilities')[_0x2944e3(0x1c1)]=_0x30ef99[_0x2944e3(0x18d)](_0x1b5749=>'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22result-box\x22\x20onclick=\x22fillGuessInputs('+_0x1b5749[_0x2944e3(0x189)](',\x20')+_0x2944e3(0x1a7)+_0x1b5749[_0x2944e3(0x189)]('')+_0x2944e3(0x1c9))['join']('');}function fillGuessInputs(_0x16a45b,_0x27fa3f,_0x663373){const _0x20c6a3=_0x336d,_0x589796=document[_0x20c6a3(0x1aa)](_0x20c6a3(0x1c4));for(let _0x437611 of _0x589796){const _0x5b228d=_0x437611[_0x20c6a3(0x1aa)]('.num-input');if(Array[_0x20c6a3(0x184)](_0x5b228d)[_0x20c6a3(0x190)](_0x22f105=>_0x22f105[_0x20c6a3(0x1ae)]==='')){_0x5b228d[0x0]['value']=_0x16a45b,_0x5b228d[0x1][_0x20c6a3(0x1ae)]=_0x27fa3f,_0x5b228d[0x2][_0x20c6a3(0x1ae)]=_0x663373;break;}}calculateProbability();}function resetInputs(){const _0x488dcf=_0x336d,_0x3f7fcd=document[_0x488dcf(0x1aa)](_0x488dcf(0x1c4));_0x3f7fcd[_0x488dcf(0x1b8)](_0x23016d=>{const _0x31e40=_0x488dcf,_0x22079a=parseInt(_0x23016d[_0x31e40(0x193)][_0x31e40(0x1ca)]),_0x1ac4bd=_0x23016d['querySelector'](_0x31e40(0x1a0)),_0x302227=_0x1ac4bd?_0x1ac4bd[_0x31e40(0x197)]:![],_0x3593d3=_0x23016d['querySelectorAll']('.num-input'),_0x4da507=_0x23016d[_0x31e40(0x1c5)](_0x31e40(0x1b4)),_0x381d5f=_0x23016d[_0x31e40(0x1c5)](_0x31e40(0x1b1));_0x4da507[_0x31e40(0x1a2)]=0x0,_0x381d5f[_0x31e40(0x1a2)]=0x0;if((_0x22079a===0x1||_0x22079a===0x2)&&_0x302227)return;_0x3593d3['forEach'](_0x1cc214=>_0x1cc214[_0x31e40(0x1a2)]=0x0);}),applyRandomToFirstTwo_WithFixCheck(),document[_0x488dcf(0x1b3)](_0x488dcf(0x1b5))[_0x488dcf(0x1c3)]='0',document[_0x488dcf(0x1b3)](_0x488dcf(0x19b))[_0x488dcf(0x1c1)]='';}function _0x336d(_0x3585fe,_0x282ffe){const _0xa4980d=_0x2728();return _0x336d=function(_0x5bb00b,_0xb08806){_0x5bb00b=_0x5bb00b-0x182;let _0x4a4c24=_0xa4980d[_0x5bb00b];return _0x4a4c24;},_0x336d(_0x3585fe,_0x282ffe);}window[_0x3b62ba(0x19f)]=initializeGuessInputs;
+</script>
+
+</body>
+</html>
