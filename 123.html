@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구 게임 확률 계산기 ver_3.2.7 (최종 정리 버전)</title>
+<style>
+/* ... (CSS 난독화 부분은 이전과 동일하게 유지) ... */
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 10px;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: #111;
+}
+h1,h2,h3 {
+    margin: 6px 0 10px 0;
+    font-weight: 700;
+}
+.e {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #929292;
+}
+.g {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+}
+.b {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+.f {
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    flex-shrink: 0 !important;
+}
+.h,.i {
+    width: 55px !important;
+    min-width: 55px !important;
+    max-width: 55px !important;
+    height: 34px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    flex-shrink: 0 !important;
+}
+button {
+    border: none;
+    background: #333;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 14px;
+}
+button:hover {
+    background: #444;
+}
+button:active {
+    transform: scale(0.97);
+}
+#c1 {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+.a {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+    background: #222;
+    color: #0ff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #444;
+    transition: 0.12s ease;
+}
+.a:hover {
+    background: #333;
+}
+@media (max-width: 480px) {
+    .e {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .g,.b {
+        flex-wrap: wrap;
+    }
+}
+.c {
+    display: flex;
+    gap: 20px;
+    margin: 10px 0;
+}
+.j {
+    margin-left: 20px;
+    background: #e02121;
+}
+.j:hover {
+    background: #9e5e5e;
+}
+.m {
+    background: linear-gradient(135deg,#0c98f5,#007cff);
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,150,255,.35);
+    transition: 0.15s ease;
+}
+.c4 {
+    margin-top: 20px;
+    padding: 6px 15px;
+    background: #002244;
+    border: 2px solid #00aaff;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.0;
+}
+#aiRecommendationLabel {
+    font-size: 1.2rem;
+    margin: 0;
+    padding-top: 2px;
+    color: #00aaff;
+    font-weight: 700;
+    display: block;
+}
+#c3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #00ffff;
+    display: block;
+    cursor: pointer;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0,255,255,.5);
+    transition: 0.1s;
+}
+#c3:hover {
+    transform: scale(1.05);
+    color: #00ffff;
+}
+.n {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+.o {
+    display: none !important;
+}
+</style>
+
+<script type="text/javascript">
+  document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+  });
+</script>
+<script type="text/javascript">
+  var omitformtags=["input", "textarea", "select"]
+  omitformtags=omitformtags.join("|")
+  function disableselect(e){
+    if (omitformtags.indexOf(e.target.tagName.toLowerCase())==-1)
+      return false
+  }
+  function reEnable(){
+    return true
+  }
+  if (typeof document.onselectstart!="undefined")
+    document.onselectstart=new Function ("return false")
+  else{
+    document.onmousedown=disableselect
+    document.onmouseup=reEnable
+  }
+</script>
+</head>
+<body>
+<div class="container">
+    <h1>숫자 야구 게임 확률 계산기 (ver_3.2.7 4회 입력 최종 정리)</h1>
+    <h3>💡 **입력 1~4**에 S/B 입력 후, **확률 계산**을 누르면 <br> **AI 추천 번호 (최대 5회 시도)**가 나옵니다.</h3>
+    
+    <div class="c">
+        <button class="m" onclick="k()">확률 계산</button>
+        <button class="secondary j" onclick="j()">전체 리셋</button>
+    </div>
+
+    <div id="inputs">
+        <h2>예측수 입력 (최대 4회까지)</h2>
+        <div id="c2"></div>
+    </div>
+        
+    <div class="c4" id="c4">
+        <span id="aiRecommendationLabel">🤖 AI 추천 번호</span><span id="c3">계산 전</span>
+        <p class="n">추천 번호를 클릭하면 다음 입력칸에 자동으로 채워집니다. (5회 시도 시 자동 채우기 불가)</p>
+    </div>
+
+    <h2>가능한 조합의 수 표시: <span id="c0">0</span></h2>
+    <div id="c1"></div>
+</div>
+
+<script>
+(function() {
+    
+    // 💡 블로그 주소: gamesmuonline.blogspot.com
+    const ALLOWED_BLOG_DOMAIN = "gamesmuonline.blogspot.com";
+    // 💡 호스팅 주소: tensenbi.github.io
+    const CODE_HOST_DOMAIN = "tensenbi.github.io";
+    
+    const currentHost = window.location.hostname;
+    const referrer = document.referrer;
+    
+    let isAllowed = false;
+
+    // 1. 현재 실행 주소가 블로그 도메인일 경우 허용 (직접 접속)
+    if (currentHost.includes(ALLOWED_BLOG_DOMAIN)) {
+        isAllowed = true;
+    }
+    // 2. 현재 실행 주소가 호스팅 도메인일 경우
+    else if (currentHost.includes(CODE_HOST_DOMAIN)) {
+        // 2-A. Referrer가 없는 경우 (URL 직접 입력) -> 테스트 용도로 허용
+        if (!referrer) { 
+            isAllowed = true;
+        }
+        // 2-B. Referrer가 블로그 도메인인 경우 (블로그에서 iFrame으로 로드) -> 허용
+        else if (referrer.includes(ALLOWED_BLOG_DOMAIN)) {
+            isAllowed = true;
+        }
+        // 2-C. 그 외 (다른 복제 사이트에서 iFrame으로 로드) -> 차단 (isAllowed = false 유지)
+    }
+
+    if (!isAllowed) {
+        alert("🚨 이 콘텐츠는 무단 복제되어 사용 중입니다. 원본 블로그에서 이용해 주세요.");
+        return;
+    }
+
+    
+    
+
+    
+    function a(index) {
+        return `
+            <div class="e" data-index="${index}">
+                <div class="g">
+                    <label>입력${index}:</label>
+                    ${Array.from({ length: 3 }, () => `
+                        <select class="f">
+                            <option value="" disabled selected>선택</option>
+                            ${Array.from({ length: 10 }, (_, j) => `<option value="${j}">${j}</option>`).join('')}
+                        </select>
+                    `).join('')}
+                </div>
+
+                <div class="b">
+                    <span>S, B입력 ㅡ</span>
+                    <label>S:</label>
+                    <select class="h">
+                        <option value="" disabled selected>선택</option>
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                    <label>B:</label>
+                    <select class="i">
+                        <option value="" disabled selected>선택</option>
+                        ${Array.from({ length: 4 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+        `;
+    }
+
+    
+    function b() {
+        const row1 = document.querySelector(".e[data-index='1']");
+        const row2 = document.querySelector(".e[data-index='2']");
+        if (!row1 || !row2) return;
+
+        const numInput1 = row1.querySelectorAll(".f");
+        const numInput2 = row2.querySelectorAll(".f");
+
+        const pool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        
+        const allEmpty1 = Array.from(numInput1).every(i => i.value === "");
+        const allEmpty2 = Array.from(numInput2).every(i => i.value === "");
+
+        if (allEmpty1 && allEmpty2) {
+            
+            for (let i = 0; i < 3; i++) {
+                let idx = Math.floor(Math.random() * pool.length);
+                numInput1[i].value = pool[idx];
+                pool.splice(idx, 1); 
+
+                idx = Math.floor(Math.random() * pool.length);
+                numInput2[i].value = pool[idx];
+                pool.splice(idx, 1);
+            }
+        }
+    }
+
+    function c() {
+        const guessInputsContainer = document.getElementById("c2");
+        
+        guessInputsContainer.innerHTML = Array.from({ length: 4 }, (_, i) => a(i + 1)).join('');
+        b();
+    }
+
+    
+    function d() {
+        const possibilities = [];
+        for (let i = 0; i <= 9; i++) {
+            for (let j = 0; j <= 9; j++) {
+                if (j === i) continue;
+                for (let k = 0; k <= 9; k++) {
+                    if (k === i || k === j) continue;
+                    possibilities.push([i, j, k]);
+                }
+            }
+        }
+        return possibilities;
+    }
+
+    function e1(answer, guess) {
+        let strike = 0;
+        let ball = 0;
+        for (let i = 0; i < 3; i++) {
+            if (answer[i] === guess[i]) strike++;
+            else if (answer.includes(guess[i])) ball++;
+        }
+        return { strike, ball };
+    }
+
+    function f1(possibilities, guesses) {
+        return possibilities.filter(possibility => {
+            return guesses.every(guess => {
+                const result = e1(possibility, guess.numbers);
+                return result.strike === guess.strike && guess.ball === result.ball;
+            });
+        });
+    }
+
+    function g1(numbers) {
+        return new Set(numbers).size === numbers.length;
+    }
+
+    
+    function h1(currentPossibilities, guessesCount) {
+        if (currentPossibilities.length <= 1) return null;
+
+        
+        const isGreedyMode = guessesCount >= 3 || currentPossibilities.length <= 5; 
+
+        
+        const searchGuesses = isGreedyMode ? currentPossibilities : d();
+        
+        
+        const currentPossibilitySet = new Set(currentPossibilities.map(p => p.join('')));
+
+        let bestGuess = null;
+        let minWorstCaseSize = Infinity;
+        let isBestGuessAPossibility = false; 
+
+        for (const guess of searchGuesses) {
+            const guessString = guess.join('');
+            
+            const isCurrentGuessAPossibility = !isGreedyMode && currentPossibilitySet.has(guessString);
+            
+            const resultCounts = {}; 
+
+            
+            for (const possibility of currentPossibilities) {
+                const { strike, ball } = e1(possibility, guess);
+                const key = `${strike}:${ball}`;
+                resultCounts[key] = (resultCounts[key] || 0) + 1;
+            }
+
+            
+            let maxCaseSize = 0;
+            for (const key in resultCounts) {
+                if (resultCounts[key] > maxCaseSize) {
+                    maxCaseSize = resultCounts[key];
+                }
+            }
+
+            
+            if (maxCaseSize < minWorstCaseSize) {
+                
+                minWorstCaseSize = maxCaseSize;
+                bestGuess = { numbers: guess, maxCaseSize: maxCaseSize };
+                isBestGuessAPossibility = isCurrentGuessAPossibility;
+            } else if (maxCaseSize === minWorstCaseSize) {
+                
+                if (!isGreedyMode) {
+                    
+                    if (!isBestGuessAPossibility && isCurrentGuessAPossibility) {
+                        bestGuess = { numbers: guess, maxCaseSize: maxCaseSize };
+                        isBestGuessAPossibility = true;
+                    }
+                } else {
+                    
+                }
+            }
+        }
+
+        return bestGuess;
+    }
+
+
+    function k() {
+        const guessRows = document.querySelectorAll(".e");
+        const guesses = [];
+        let hasIncompleteGuess = false; 
+
+        
+        for (const row of guessRows) {
+            const numbers = Array.from(row.querySelectorAll(".f")).map(input => parseInt(input.value));
+            const strike = parseInt(row.querySelector(".h").value);
+            const ball = parseInt(row.querySelector(".i").value);
+            const index = row.dataset.index;
+            
+            const isNumInputted = numbers.every(num => !isNaN(num));
+            const isSBInputted = !isNaN(strike) && !isNaN(ball);
+
+            
+            if (isNumInputted && !isSBInputted) {
+                 hasIncompleteGuess = true;
+                 break; 
+            }
+
+            
+            if (isNumInputted && isSBInputted) {
+                if (!g1(numbers)) {
+                    alert(`[입력${index} 오류]\n추측 숫자 '${numbers.join(', ')}'에 중복이 있습니다.\n서로 다른 숫자를 입력해주세요.`);
+                    return;
+                }
+
+                if (strike + ball > 3) {
+                    alert(`[입력${index} 오류]\nS(${strike}) + B(${ball}) = ${strike + ball}는 3을 초과할 수 없습니다.`);
+                    return;
+                }
+
+                if (strike === 3 && ball !== 0) {
+                    alert(`[입력${index} 오류]\n3 스트라이크일 때 볼은 0이어야 합니다.`);
+                    return;
+                }
+                
+                guesses.push({ numbers, strike, ball });
+                
+                if (strike === 3) {
+                    break;
+                }
+            }
+        }
+        
+        
+        if (hasIncompleteGuess) {
+            alert("⚠️ 입력된 추측 숫자에 대한 S/B 값이 누락되었습니다.\nS/B를 입력하거나, 해당 행의 숫자를 모두 지워주세요.");
+            return;
+        }
+
+        const currentGuessesCount = guesses.length; 
+
+        if (currentGuessesCount === 0) {
+            alert("적어도 하나의 유효한 추측(숫자+S+B)을 입력하세요.");
+            document.getElementById("c0").textContent = "0";
+            document.getElementById("c1").innerHTML = "";
+            document.getElementById("c4").classList.remove('o'); 
+            document.getElementById("c3").textContent = "계산 전";
+            return;
+        }
+
+        
+        let possibilities = d();
+        possibilities = f1(possibilities, guesses);
+
+        
+        const bestGuess = h1(possibilities, currentGuessesCount);
+
+        document.getElementById("c0").textContent = possibilities.length;
+        
+        const targetIndex = currentGuessesCount + 1; 
+        
+        
+        const isGameOver = possibilities.length === 0 || (guesses.find(g => g.strike === 3));
+        const isLastGuess = currentGuessesCount === 4; 
+
+        
+        const recommendedNumberElement = document.getElementById("c3");
+        const recommendationBox = document.getElementById("c4");
+
+        if (isGameOver) {
+             recommendedNumberElement.textContent = "게임 종료!";
+             recommendedNumberElement.onclick = null;
+             recommendationBox.classList.remove('o');
+        } else if (possibilities.length === 1) {
+             
+             recommendedNumberElement.textContent = possibilities[0].join("");
+             recommendedNumberElement.onclick = () => l(possibilities[0][0], possibilities[0][1], possibilities[0][2], targetIndex);
+             recommendationBox.classList.remove('o');
+        } else if (bestGuess) {
+             
+             recommendedNumberElement.textContent = bestGuess.numbers.join("");
+             
+             if (isLastGuess) {
+                
+                recommendedNumberElement.onclick = () => alert("마지막 5번째 시도입니다. 이 번호를 사용해 게임을 종료하세요!");
+             } else {
+                recommendedNumberElement.onclick = () => l(bestGuess.numbers[0], bestGuess.numbers[1], bestGuess.numbers[2], targetIndex);
+             }
+             
+             recommendationBox.classList.remove('o');
+        } else {
+             
+             recommendedNumberElement.textContent = "추천 불가";
+             recommendedNumberElement.onclick = null;
+             recommendationBox.classList.add('o'); 
+        }
+        
+        
+        document.getElementById("c1").innerHTML = possibilities.map(p => {
+            const onclickHandler = (isGameOver || isLastGuess) ? "" : `onclick="l(${p.join(', ')}, ${targetIndex})"`;
+            
+            
+            const isRecommended = bestGuess && p.join("") === bestGuess.numbers.join("");
+
+            return `
+                <div class="a ${isRecommended ? 'recommended' : ''}" ${onclickHandler}>
+                    ${p.join("")}
+                </div>
+            `;
+        }).join("");
+    }
+
+    
+    function l(num1, num2, num3, targetIndex) {
+        
+        if (targetIndex > 4) {
+            alert("마지막 5번째 시도입니다. 이 번호를 사용해 게임을 종료하세요. (입력칸 자동 채우기 불가)");
+            return;
+        }
+
+        
+        const row = document.querySelector(`.e[data-index="${targetIndex}"]`);
+        
+        if (row) {
+            const numInputs = row.querySelectorAll(".f");
+            
+            
+            const allEmpty = Array.from(numInputs).every(i => i.value === "");
+
+            if (allEmpty) {
+                numInputs[0].value = num1;
+                numInputs[1].value = num2;
+                numInputs[2].value = num3;
+            } else {
+                console.warn(`입력${targetIndex} 행에 이미 숫자가 있습니다. S/B를 입력하거나 리셋하세요.`);
+            }
+        }
+    }
+
+    function j() {
+        const rows = document.querySelectorAll(".e");
+
+        rows.forEach(row => {
+            const numInputs = row.querySelectorAll(".f");
+            const strikeInput = row.querySelector(".h");
+            const ballInput = row.querySelector(".i");
+
+            numInputs.forEach(i => i.selectedIndex = 0);
+            strikeInput.selectedIndex = 0;
+            ballInput.selectedIndex = 0;
+        });
+
+        b();
+        
+        document.getElementById("c0").textContent = "0";
+        document.getElementById("c1").innerHTML = "";
+        
+        
+        document.getElementById("c3").textContent = "계산 전";
+        document.getElementById("c3").onclick = null;
+        document.getElementById("c4").classList.remove('o');
+    }
+
+    window.onload = c;
+})();
+</script>
+
+</body>
+</html>
