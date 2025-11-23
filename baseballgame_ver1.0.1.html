@@ -301,6 +301,7 @@ button:active {
 <body>
 <div class="container">
     <h1>숫자 야구 게임 확률 계산기</h1>
+    <button id="rewardPopupBtn" class="reward-btn">보상 내용 및 점수</button>
 <!-- 팝업 배경 -->
 <div id="rewardOverlay"></div>
 
@@ -360,7 +361,7 @@ button:active {
     <div class="button-row">
         <button class="primary" onclick="calculateProbability()">확률 계산</button>
         <button class="secondary reset-btn" onclick="resetInputs()">리셋</button>
-        <button id="rewardPopupBtn" class="reward-btn">보상 내용 및 점수</button>
+        
     </div>
 
     <h2>가능한 조합의 수 표시: <span id="possibilityCount">0</span></h2>
@@ -392,5 +393,6 @@ document.getElementById("rewardOverlay").onclick = function () {
 </body>
 
 </html>
+
 
 
