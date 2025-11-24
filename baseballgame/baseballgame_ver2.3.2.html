@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숫자 야구 게임 확률 계산기 ver_4</title>
 <link rel="stylesheet" href="baseballgame_ver2.3.2b.css">
+    
+     <script type="text/javascript">
+  document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+   
+  });
+</script>
+    
+     <script type="text/javascript">
+          var omitformtags=["input", "textarea", "select"]
+          omitformtags=omitformtags.join("|")
+
+          function disableselect(e){
+               if (omitformtags.indexOf(e.target.tagName.toLowerCase())==-1)
+               return false
+          }
+
+          function reEnable(){
+               return true
+          }
+
+          if (typeof document.onselectstart!="undefined")
+              document.onselectstart=new Function ("return false")
+          else{
+              document.onmousedown=disableselect
+              document.onmouseup=reEnable
+          }
+</script>
+
 </head>
 <body>
      <h1>숫자 야구 게임 확률 예측기</h1>
