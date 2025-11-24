@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>숫자 야구 게임 확률 계산기 ver_4.0.0 (엔트로피 최적화)</title>
-<link rel="stylesheet" href="baseballgame_ver2.3.2b.css">
+    <title>숫자 야구 게임 확률 계산기 ver_4</title>
+<link rel="stylesheet" href="baseballgame_ver2.3.2.css">
 </head>
 <body>
-    <h1>숫자 야구 게임 확률 계산기</h1>
-    <p>💡 AI가 엔트로피 최적화 기반으로 다음 추측 번호를 추천합니다. 추천 번호를 클릭하면 다음 입력칸에 자동 입력됩니다.</p>
+     <h1>숫자 야구 게임 확률 예측기</h1>
+    <p>AI가 다음 추측 번호를 추천합니다. 추천 번호를 클릭하면 다음 입력칸에 자동 입력됩니다.</p>
+    <p>AI가 꼭 정답을 추측하는건 아닙니다. (틀릴수도 있으니 자기가 고르고 싶으면 <a href="https://gamesmuonline.blogspot.com/2025/11/v3.html" target="_blank"><span style="color: red;">다른 버전(V3)</span></a>을 하세요.)</p>
     
     <div id="inputs">
         <h2>예측수 입력</h2>
@@ -20,9 +21,9 @@
     
     <button id="rewardPopupBtn" class="reward-btn">보상 내용 및 점수</button>
 
-    <div id="recommendationBox">
-        <label>AI 추천 번호 (클릭 입력):</label>
-        <div id="recommendedNumber">계산 전</div>
+    <div class="recommendation-box" id="recommendationBox">
+        <span id="aiRecommendationLabel">🤖 AI 추천 번호</span><span id="recommendedNumber">계산 전</span>
+        <p class="recommendation-subtitle">추천 번호를 클릭하면 다음 입력칸에 자동으로 채워집니다. </p>
     </div>
 
     <div id="results">
