@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구 게임 확률 계산기 ver_4.0.0 (엔트로피 최적화)</title>
+<link rel="stylesheet" href="baseballgame_ver2.3.2.css">
+</head>
+<body>
+    <h1>숫자 야구 게임 확률 계산기</h1>
+    <p>💡 AI가 엔트로피 최적화 기반으로 다음 추측 번호를 추천합니다. 추천 번호를 클릭하면 다음 입력칸에 자동 입력됩니다.</p>
+    
+    <div id="inputs">
+        <h2>예측수 입력</h2>
+        <div id="guess-inputs"></div>
+    </div>
+        
+    <button onclick="calculateProbability()" class="action-btn">확률 계산 및 추천</button>
+    <button onclick="resetInputs()" class="action-btn reset-btn">리셋</button>
+    
+    <button id="rewardPopupBtn" class="reward-btn">보상 내용 및 점수</button>
+
+    <div id="recommendationBox">
+        <label>AI 추천 번호 (클릭 입력):</label>
+        <div id="recommendedNumber">계산 전</div>
+    </div>
+
+    <div id="results">
+        <h2>가능한 조합의 수 표시: <span id="possibilityCount">0</span>개</h2>
+        <div id="possibilities"></div>
+    </div>
+
+    <div id="rewardOverlay"></div>
+
+    <div id="rewardPopup">
+        <h2>보상 내용 및 점수</h2>
+        <div class="rewardContent">
+
+        <h3>점수 계산</h3>
+        – S 개수 × 40점<br>
+        – B 개수 × 10점<br>
+        – 처음 3S: 600점<br>
+        – 두번째 3S: 500점<br>
+        – 세번째 3S: 400점<br>
+        – 네번째 3S: 320점<br>
+        – 다섯번째 3S: 285점<br><br>
+
+        <h3>이벤트 보상</h3>
+        – 450점 이상: 상급상자<br>
+        – 300점 이상: 중급상자<br>
+        – 300점 미만: 하급상자<br><br>
+
+        <h3>상자 보상 내용</h3>
+
+        <b>하급상자</b><br>
+        - 보석 100,000젠&nbsp;&nbsp; - 계약석  
+        <br><br>
+
+        <b>중급상자</b><br>
+        - 보석 200,000젠&nbsp;&nbsp; - 보석 묶음(10,20)&nbsp;&nbsp;  
+        - 엑셀런트 방어구&nbsp;&nbsp; - 엑셀런트 무기&nbsp;&nbsp;  
+        - 펜타그램(일반)&nbsp;&nbsp; - [귀속]빛의축복(하급)&nbsp;&nbsp;  
+        - 엘리트치료물약 5개&nbsp;&nbsp; - 엘리트마나물약 5개  
+        <br><br>
+
+        <b>상급상자</b><br>
+        - 보석 묶음(10,20,30)&nbsp;&nbsp;  
+        - 펜타그램(일반)&nbsp;&nbsp; - 펜타그램(레어)&nbsp;&nbsp;  
+        - [귀속]빛의축복(하급/중급)&nbsp;&nbsp;  
+        - 엘리트치료·마나 물약 각 5개&nbsp;&nbsp;  
+        - 행운의부적&nbsp;&nbsp;  
+        - 에르텔(0~6강 랜덤, 광휘 제외)&nbsp;&nbsp;  
+        - 계약석&nbsp;&nbsp;  
+        - 야구선수변신반지&nbsp;&nbsp; - 치어리더변신반지
+
+        </div>
+
+        <button id="rewardCloseBtn">닫기</button>
+    </div>
+    
+<script src="baseballgame_ver2.3.2b.js"></script>
+
+</body>
+</html>
